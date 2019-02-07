@@ -3,5 +3,5 @@
 
 ## run
 ```
-docker run --name mainnetloader -v /eos.data:/eos.data -t --rm -i eosio-mainnet-loader
+docker run --name mainnetloader -v /eos.data:/eos.data -t --rm -i liquidapps/eosio-mainnet-loader
 ```
