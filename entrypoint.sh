@@ -18,20 +18,6 @@ fi
 set -x
 set -e
 
-exec nodeos -e -p eosio \
-  --plugin eosio::chain_plugin \
-  --plugin eosio::chain_api_plugin \
-  --data-dir /eos.data.staging \
-  --chain-state-db-size-mb 786432 \
-  --reversible-blocks-db-size-mb 2048 \
-  --max-clients 150 \
-  --sync-fetch-span 2000 \
-  --http-server-address=0.0.0.0:8888 \
-  --http-validate-host=false \
-  --access-control-allow-origin=* \
-  --export-reversible-blocks /eos.data.staging/rev.bckp \
-  --snapshot /eos.data.staging/snapshots/snapshot-*.bin 
-  
 rm /eos.data.staging/blocks_backup.tar.gz
 cp -a /eos.data.staging /eos.data
 #rm /eos.data.staging/* -rf
