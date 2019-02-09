@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 url=`wget -q 'https://eosnode.tools/api/snapshots?limit=24' -O - | jq -e '.data[].s3' -r | grep 07-00.tar | head -n 1`
 wget "$url" -O snapshot.tar.gz
 
