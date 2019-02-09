@@ -1,5 +1,5 @@
 # docker-eosio-mainnet-loader
-The container image allows you to quickly bootstrap from snapshots and blocks log https://eosnode.tools
+The container image allows you to quickly bootstrap from snapshots and blocks log from https://eosnode.tools
 
 ## Run
 ```
