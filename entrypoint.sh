@@ -1,7 +1,9 @@
 #!/bin/bash
 cd /eos.data
-# rm -rf blocks/blocks.index  blocks/reversible state snapshot
-
+if [ "$CLEAR_DB" == "true" ]
+then
+        rm -rf blocks/blocks.index  blocks/reversible state
+fi
 
 # skip if exists
 if [ ! -f /eos.data/blocks/blocks.log ]; then
