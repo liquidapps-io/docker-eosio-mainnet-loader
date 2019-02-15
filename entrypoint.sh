@@ -3,6 +3,10 @@
 aws sts get-caller-identity && export HAVE_S3="true"
 
 cd /eos.data
+if [ "$CLEAR_ALL" == "true" ]
+then
+        rm -rf /eos.data/* || true
+fi
 
 if [ "$DOWNLOAD_NEW" == "true" ]
 then
