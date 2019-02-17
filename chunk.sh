@@ -9,7 +9,7 @@ if [ -f $LAST_SIZE_FILE ]
 then
 	LAST_SIZE=`cat $LAST_SIZE_FILE`
 	echo $CURRENT_SIZE > $LAST_SIZE_FILE
-	dd bs=1 if=$1 skip=$LAST_SIZE of=$CHUNK_LOG_FILE
+	dd bs=1 if=$LOG_FILE skip=$LAST_SIZE of=$CHUNK_LOG_FILE
 else
 	echo "first time. no chunks. setting $LAST_SIZE_FILE"
 	echo $CURRENT_SIZE > $LAST_SIZE_FILE
