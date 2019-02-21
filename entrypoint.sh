@@ -10,9 +10,8 @@ fi
 
 if [ "$DOWNLOAD_NEW" == "true" ]
 then
-        url=`wget -q 'https://eosnode.tools/api/snapshots?limit=24' -O - | jq -e '.data[].s3' -r | grep 06-00.tar | head -n 1`
-        wget "$url" -O snapshot.tar.gz
-        wget $(wget --quiet "https://eosnode.tools/api/blocks?limit=1" -O- | jq -r '.data[0].s3') -O blocks_backup.tar.gz
+        wget $(wget --quiet "https://eosnode.tools/api/bundle" -O- | jq -r '.data.snapshot.s3') -O snapshot.tar.gz
+        wget $(wget --quiet "https://eosnode.tools/api/bundle" -O- | jq -r '.data.block.s3') -O blocks_backups.tar.gz
         aws s3 cp blocks_backup.tar.gz s3://liquideos.mainnet.backup/latest/blocks_backup.tar.gz --acl public-read
         aws s3 cp snapshot.tar.gz s3://liquideos.mainnet.backup/latest/snapshot.tar.gz --acl public-read
         rm -rf /eos.data/blocks/snapshots /eos.data/blocks /eos.data/state || true
@@ -34,8 +33,7 @@ if [ ! -f /eos.data/blocks/blocks.log ]; then
                         aws s3 cp s3://liquideos.mainnet.backup/latest/snapshot.tar.gz /eos.data/snapshot.tar.gz --request-payer requester
                         aws s3 cp s3://liquideos.mainnet.backup/latest/blocks_backup.tar.gz /eos.data/blocks_backup.tar.gz --request-payer requester
                 else
-                        url=`wget -q 'https://eosnode.tools/api/snapshots?limit=24' -O - | jq -e '.data[].s3' -r | grep 07-00.tar | head -n 1`
-                        wget "$url" -O /eos.data/snapshot.tar.gz
+                        wget $(wget --quiet "https://eosnode.tools/api/bundle" -O- | jq -r '.data.snapshot.s3') -O /eos.data/snapshot.tar.gz
                         if [ ! -f /eos.data/blocks_backup.tar.gz ]; then
                                 wget $(wget --quiet "https://eosnode.tools/api/blocks?limit=1" -O- | jq -r '.data[0].s3') -O /eos.data/blocks_backup.tar.gz
                         fi
