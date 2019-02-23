@@ -1,6 +1,11 @@
 #!/bin/bash
 
-aws sts get-caller-identity && export HAVE_S3="true"
+if [ "$SKIP_S3" == "true" ]
+then
+        echo "Skipping S3"
+else
+        aws sts get-caller-identity && export HAVE_S3="true"
+fi
 
 cd /eos.data
 if [ "$CLEAR_ALL" == "true" ]
